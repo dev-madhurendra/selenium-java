@@ -5,8 +5,8 @@ public interface SeleniumConstants {
     String LOGIN_ELEMENT = "a[href='/accounts/login/']";
     String LOGIN_EMAIL_INPUT_FIELD = "input[name='login']";
     String LOGIN_PASSWORD_INPUT_FIELD = "input[name='password']";
-    String LOGIN_EMAIL_INPUT_FIELD_VALUE = "dev-madhurendra";
-    String LOGIN_PASSWORD_INPUT_FIELD_VALUE = "Madhu#786";
+    String LOGIN_EMAIL_INPUT_FIELD_VALUE = "username";
+    String LOGIN_PASSWORD_INPUT_FIELD_VALUE = "password";
     String SIGN_IN_BUTTON_CLASS_NAME = "//*[@id='signin_btn']";
     String PROFILE_ELEMENT = "navbar_user_avatar";
     String USER_NAME_ELEMENT = "a[href='/dev-madhurendra']";
