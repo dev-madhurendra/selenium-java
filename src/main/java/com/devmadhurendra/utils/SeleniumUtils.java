@@ -11,6 +11,8 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import java.time.Duration;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.TimeUnit;
 
 
@@ -129,5 +131,16 @@ public class SeleniumUtils {
                 .sendKeys("'")
                 .keyUp(Keys.CONTROL)
                 .perform();
+    }
+
+    public static void getCurrentTime() {
+        LocalTime currentTime = LocalTime.now();
+
+        // Format the time to include seconds and minutes
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String formattedTime = currentTime.format(formatter);
+
+        // Print the formatted time
+        System.out.println("Current time with seconds and minutes: " + formattedTime);
     }
 }

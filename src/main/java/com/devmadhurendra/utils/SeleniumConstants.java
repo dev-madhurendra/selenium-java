@@ -20,4 +20,7 @@ public interface SeleniumConstants {
     String SUBMIT_BUTTON_ELEMENT = "button[data-e2e-locator=\"console-submit-button\"]";
     String SEARCH_QUES = "input[placeholder='Search questions']";
     String PROBLEM_URL = "//a[@href='/problems/lowest-common-ancestor-of-deepest-leaves'])";
+
+    // Github
+
 }
