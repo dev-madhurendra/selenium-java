@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Priority Demo">
+        <classes>
+<!--            <class name="com.devmadhurendra.testng_tut.PriorityExample" />-->
+<!--            <class name="com.devmadhurendra.testng_tut.DisablingTest" />-->
+<!--            <class name="com.devmadhurendra.testng_tut.DependencyExample" />-->
+            <class name="com.devmadhurendra.testng_tut.AlwaysRunExample" />
+        </classes>
+    </test>
+</suite>

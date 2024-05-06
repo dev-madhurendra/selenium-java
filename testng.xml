@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="/home/madt/Desktop/Just.Do.It/selenium-java0-intro/src">
+        <classes>
+            <class name="com.devmadhurendra.testng_tut.FirstTestCases" />
+<!--                <methods>-->
+<!--                    <include name="setup"/>-->
+<!--                    <include name="exit"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+            <class name="com.devmadhurendra.testng_tut.SecondTestCases" />
+<!--                <methods>-->
+<!--                    <include name="setup"/>-->
+<!--                    <include name="searchCustomer"/>-->
+<!--                    <include name="addCustomer"/>-->
+<!--                    <include name="exit"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+            <class name="com.devmadhurendra.testng_tut.TC1" />
+            <class name="com.devmadhurendra.testng_tut.TC2" />
+        </classes>
+    </test>
+</suite>
