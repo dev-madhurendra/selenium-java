@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Assertions Test Demo">
+        <parameter name="uri" value="https://dev-madhurendra.vercel.app" />
+        <classes>
+            <class name="com.devmadhurendra.testng_tut.ParametersExample" />
+<!--            <class name="com.devmadhurendra.testng_tut.AssertionsExample" />-->
+        </classes>
+    </test>
+</suite>
