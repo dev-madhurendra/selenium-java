@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name="Assertions Test Demo" parallel="methods" thread-count="3">
+        <classes>
+            <class name="com.devmadhurendra.testng_tut.ParallelTestExample" />
+<!--            <class name="com.devmadhurendra.testng_tut.AssertionsExample" />-->
+        </classes>
+    </test>
+</suite>
