@@ -1,6 +1,6 @@
 package com.devmadhurendra.testng_tut;
 
-import com.devmadhurendra.ExtractLeetcodeInfo;
+import com.devmadhurendra.selenium_tut.ExtractLeetcodeInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

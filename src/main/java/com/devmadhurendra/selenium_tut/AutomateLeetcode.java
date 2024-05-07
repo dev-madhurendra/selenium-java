@@ -1,4 +1,4 @@
-package com.devmadhurendra;
+package com.devmadhurendra.selenium_tut;
 
 import com.devmadhurendra.utils.SeleniumUtils;
 import org.openqa.selenium.By;

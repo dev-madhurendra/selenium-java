@@ -1,4 +1,4 @@
-package com.devmadhurendra;
+package com.devmadhurendra.selenium_tut;
 
 import java.time.Duration;
 import java.util.Arrays;

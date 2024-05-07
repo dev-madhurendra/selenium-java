@@ -14,5 +14,4 @@ public class PriorityExample {
         System.out.println(">> Test 6");
     }
 
-
 }
