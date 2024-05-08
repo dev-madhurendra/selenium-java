@@ -43,7 +43,7 @@ public class AmazonTest {
     public void getThirdDealAndAddToCart() {
         try {
             // Get the 3rd deal
-            WebElement top3rdDeal = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(TOP_3_RD_DEAL)));
+            WebElement top3rdDeal = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(TOP_3_RD_DEAL))).get(2);
             top3rdDeal.click();
 
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PRODUCT_TO_BE_ADDED))).click();
@@ -52,7 +52,7 @@ public class AmazonTest {
 
             // Add minimum quantities required item to cart
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADD_TO_CART_BUTTON_ELEMENT))).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SKIP_ELEMENT))).click();
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SKIP_ELEMENT))).click();
 
             // Verify if the quantity is as expected in the cart
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CART_BUTTON_ELEMENT))).click();
@@ -105,6 +105,6 @@ public class AmazonTest {
     @AfterClass
     public void tearDown() {
         // Quit WebDriver
-        // driver.quit();
+         driver.quit();
     }
 }
