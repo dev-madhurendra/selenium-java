@@ -22,8 +22,8 @@ public interface AmazonTestConstants {
     String ALL_PRODUCTS = "//div[@data-cy='title-recipe']";
     String MOBILES_NAV = "//a[text()='Mobiles']";
     String PROCEED_TO_BUY = "#sc-buy-box-ptc-button";
-    String AMAZON_USERNAME = "7780108408";
-    String AMAZON_PASSWORD = "Sai@123Amazon";
+    String AMAZON_USERNAME = "";
+    String AMAZON_PASSWORD = "";
     String EMAIL_LOGIN = "#ap_email";
     String CONTINUE = "#continue";
     String PASSWORD_LOGIN = "#ap_password";
