@@ -1,0 +1,191 @@
+package com.devmadhurendra.assignment;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.time.Duration;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static com.devmadhurendra.assignment.AmazonTestConstants.*;
+
+public class Test {
+
+    WebDriver driver;
+    WebDriverWait wait;
+    Logger logger = Logger.getLogger(AmazonTest.class.getName());
+
+    @BeforeClass
+    public void setUp() {
+        // Set up WebDriver
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        // Navigate to Amazon.in
+        driver.get(AMAZON_URI);
+    }
+
+    @Test(priority = 1)
+    public void clickOnTodaysDeals() {
+        // Click on Today's Deals
+        WebElement todayDealsButton =
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(TODAY_DEAL_XPATH)));
+        todayDealsButton.click();
+    }
+
+    @Test(priority = 2)
+    public void getThirdDealAndAddToCart() {
+        try {
+            // Get the 3rd deal
+            WebElement top3rdDeal = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(TOP_3_RD_DEAL))).get(2);
+            top3rdDeal.click();
+
+
+            // WebElement product = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PRODUCT_TO_BE_ADDED)));
+            try {
+                // Attempt to click on the "Product to be added" element
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(PRODUCT_TO_BE_ADDED))).click();
+            } catch (TimeoutException e) {
+                // If the "Product to be added" element is not found, click on the "Add to Cart" button
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADD_TO_CART_BUTTON_ELEMENT))).click();
+            } finally {
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADD_TO_CART_BUTTON_ELEMENT))).click();
+            }
+
+            // String productAddedInCart = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(PRODUCT_HAVE_TO_ADD_IN_CART))).getText();
+
+            // Add minimum quantities required item to cart
+            // wait.until(ExpectedConditions.elementToBeClickable(By.xpath(ADD_TO_CART_BUTTON_ELEMENT))).click();
+            // wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SKIP_ELEMENT))).click();
+
+            // Verify if the quantity is as expected in the cart
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CART_BUTTON_ELEMENT))).click();
+            } catch (TimeoutException e) {
+                wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ANOTHER_CART_ELEMENT))).click();
+            }
+            // String productAvailableInCart = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(ADDED_ITEM_IN_CART_PRODUCT))).getText();
+            // productAvailableInCart = productAvailableInCart.substring(0, productAddedInCart.length());
+
+            // Verifying product name
+            // Assert.assertEquals(productAddedInCart, productAvailableInCart);
+
+            // Verifying product quantity
+            String quantity = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(QUANTITY_ELEMENT))).getText();
+            logger.log(Level.INFO, quantity);
+            Assert.assertEquals("1", quantity);
+
+        } catch (TimeoutException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        }
+    }
+
+    @Test(priority = 3)
+    public void searchForMobilesAndScroll() {
+        // Search for Mobiles
+        WebElement searchedBox = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(SEARCH_INPUT_ELEMENT)));
+        Actions actions = new Actions(driver);
+
+        actions.moveToElement(searchedBox)
+                .click()
+                .sendKeys(VALUE_TO_SEARCH)
+                .keyDown(Keys.ENTER)
+                .keyDown(Keys.ENTER)
+                .perform();
+
+        List<WebElement> allProducts = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath(ALL_PRODUCTS)));
+
+        String details = allProducts.get(allProducts.size() - 1).getText();
+
+        logger.log(Level.INFO, details);
+    }
+
+    @Test(priority = 4)
+    public void navigateToMobilePhones() {
+        WebElement mobileElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(MOBILES_NAV)));
+
+        // Navigate from left nav to Mobiles and select Mobile phones
+        mobileElement.click();
+        driver.navigate().back();
+    }
+
+    @Test(priority = 5)
+    public void selectPrimeDeliveryCheckbox() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ANOTHER_CART_ELEMENT))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(PROCEED_TO_BUY))).click();
+    }
+
+    @Test(priority = 6)
+    public void login() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(EMAIL_LOGIN))).sendKeys(AMAZON_USERNAME);
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(CONTINUE))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PASSWORD_LOGIN))).sendKeys(AMAZON_PASSWORD);
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(SIGN_IN))).click();
+    }
+
+    @Test(priority = 7)
+    public void getITemDeliveryDate() {
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ITEM_DELIVERY_DATE)));
+        String date = element.getText();
+        System.out.println(date);
+        Assert.assertTrue(element.isDisplayed());
+    }
+
+    @Test(priority = 8)
+    public void goToOrdersAndSelectPastOneYearOrders() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(HOME_PAGE))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(RETURN_AND_ORDERS))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(SELECT_DROPDOWN))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(SELECT_PAST_ONE_YEAR))).click();
+        String ordersInOneYear = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ORDERS_IN_ONE_YEAR))).getText();
+        String expected = "4 orders";
+        Assert.assertEquals(expected, ordersInOneYear);
+
+    }
+
+    @Test(priority = 9)
+    public void addNewAddress() {
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(YOUR_ACCOUNTS))).click();
+        // wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(YOUR_ACCOUNT))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(YOUR_ADDRESSES))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(ADD_ADDRESS))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(FULL_NAME))).sendKeys(FULL_NAME_VALUE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(MOBILE_NUMBER))).sendKeys(MOBILE_NUMBER_VALUE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(PIN_CODE))).sendKeys(PIN_CODE_VALUE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ADDRESS_LINE_1))).sendKeys(ADDRESS_LINE_1_VALUE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ADDRESS_LINE_2))).sendKeys(ADDRESS_LINE_2_VALUE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(LANDMARK))).sendKeys(LANDMARK_VALUE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(TOWN_CITY))).sendKeys(TOWN_CITY_VALUE);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CHOOSE_CITY))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(UTTAR_PRADESH))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(ADD_ADDRESS_BUTTON))).click();
+
+        List<WebElement> addressesAdded =
+                wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector(ADDRESS_COLUMN)));
+
+        Assert.assertEquals(4, addressesAdded.size());
+
+    }
+
+    @Test(priority = 10)
+    public void addNewPaymentsMethod() {
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(YOUR_ACCOUNT_TREE))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(PAYMENT_OPTIONS))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(EDIT_PAYMENT))).click();
+    }
+
+
+
+    @AfterClass
+    public void tearDown() {
+        // Quit WebDriver
+        driver.quit();
+    }
+}
